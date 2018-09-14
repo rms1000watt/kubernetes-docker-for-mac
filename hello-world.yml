@@ -1,20 +1,30 @@
-apiVersion: apps/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
-  labels:
-    app: helloworld
-  name: helloworld
+  name: test-echo
 spec:
-  replicas: 1
+  selector:
+    matchLabels:
+      app: test-echo
+  replicas: 2
   template:
     metadata:
       labels:
-        app: helloworld
-      name: helloworld
+        app: test-echo
     spec:
       containers:
-        - name: helloworld
-          image: gcr.io/hightowerlabs/helloworld:0.0.1
-          imagePullPolicy: Always
-          args:
-            - "-http=127.0.0.1:8080"
+      - name: test-echo
+        image: rms1000watt/dummy-golang-project
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: test-echo
+spec:
+  type: LoadBalancer
+  ports:
+  - port: 80
+    targetPort: 9999
+    protocol: TCP
+  selector:
+    app: test-echo

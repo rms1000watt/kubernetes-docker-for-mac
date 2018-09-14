@@ -1,0 +1,14 @@
+replicaCount: 1
+image:
+  repository: rms1000watt/dummy-golang-project
+  tag: latest
+  pullPolicy: IfNotPresent
+
+deployment:
+  enabled: true
+
+service:
+  enabled: true
+  type: LoadBalancer
+  internalPort: 9999
+  externalPort: 80
