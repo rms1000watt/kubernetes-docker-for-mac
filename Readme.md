@@ -62,7 +62,7 @@ kubectl delete -f https://raw.githubusercontent.com/kubernetes/dashboard/master/
 Play with helm [COPIED FROM CLOUDPOSSE](https://github.com/cloudposse/charts)
 
 ```bash
-helm install ./monochart
+helm install ./monochart -f values.yaml
 helm ls
 kubectl get deployments
 kubectl get services
@@ -70,5 +70,5 @@ kubectl get pods
 
 curl localhost/hello-worldddd
 
-helm delete $NAME_HERE
+helm delete $(helm ls -q)
 ```
