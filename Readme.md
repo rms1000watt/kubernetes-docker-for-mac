@@ -27,16 +27,11 @@ brew install kubernetes-cli kubernetes-helm
 
 ```bash
 helm init
-cd monochart
-helm repo add common https://kubernetes-charts-incubator.storage.googleapis.com/
-helm repo add dockercfg https://charts.cloudposse.com/incubator/
-helm dependency update
-cd ..
 ```
 
 ## Run
 
-Deploy the hello world server
+Deploy the hello world server:
 
 ```bash
 kubectl apply -f hello-world.yml
@@ -49,7 +44,7 @@ curl localhost/hello-worldddd
 kubectl delete -f hello-world.yml
 ```
 
-Deploy and view the dashboard
+Deploy and view the dashboard:
 
 ```bash
 kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/master/src/deploy/recommended/kubernetes-dashboard.yaml
@@ -59,16 +54,24 @@ kubectl proxy
 kubectl delete -f https://raw.githubusercontent.com/kubernetes/dashboard/master/src/deploy/recommended/kubernetes-dashboard.yaml
 ```
 
-Play with helm [COPIED FROM CLOUDPOSSE](https://github.com/cloudposse/charts)
+Play with helm:
 
 ```bash
-helm install ./monochart -f values.yaml
+# Add CloudPosse-Incubator repo
+helm repo add cpi https://charts.cloudposse.com/incubator/
+
+# Install the chart
+helm install cpi/monochart -f values.yml
+
+# Look around
 helm ls
 kubectl get deployments
 kubectl get services
 kubectl get pods
 
+# Curl
 curl localhost/hello-worldddd
 
+# Cleanup
 helm delete $(helm ls -q)
 ```
