@@ -57,11 +57,11 @@ kubectl delete -f https://raw.githubusercontent.com/kubernetes/dashboard/master/
 Play with helm:
 
 ```bash
-# Add CloudPosse-Incubator repo
-helm repo add cpi https://charts.cloudposse.com/incubator/
+# Add helm repo
+helm repo add rms1000watt https://rms1000watt.github.io/helm-charts
 
 # Install the chart
-helm install cpi/monochart -f values.yml
+helm install rms1000watt/monochart -f values.yml
 
 # Look around
 helm ls
@@ -73,5 +73,5 @@ kubectl get pods
 curl localhost/hello-worldddd
 
 # Cleanup
-helm delete $(helm ls -q)
+helm ls -q | xargs helm delete
 ```
